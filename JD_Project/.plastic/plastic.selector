@@ -1,4 +1,0 @@
-repository "JD_Project@BCC_company@cloud"
-  path "/"
-    br "/main"
-    co "/main"

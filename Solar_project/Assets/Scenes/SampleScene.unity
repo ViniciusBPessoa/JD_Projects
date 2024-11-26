@@ -301,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sun
       objectReference: {fileID: 0}
+    - target: {fileID: 3688004140673792586, guid: 87d108ade80cfcf40b1c1e0f3011a738, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6430977371388936338, guid: 87d108ade80cfcf40b1c1e0f3011a738, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -340,6 +344,10 @@ PrefabInstance:
     - target: {fileID: 6430977371388936338, guid: 87d108ade80cfcf40b1c1e0f3011a738, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493373016039347621, guid: 87d108ade80cfcf40b1c1e0f3011a738, type: 3}
+      propertyPath: velocidade
+      value: -0.0009
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
