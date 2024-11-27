@@ -152,10 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  mainCamera: {fileID: 0}
-  mouseSpeed: 10
-  followMouse: 1
-  heightOffset: 0
+  camera: {fileID: 0}
 --- !u!1001 &1379034739954781707
 PrefabInstance:
   m_ObjectHideFlags: 0
