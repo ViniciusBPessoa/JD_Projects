@@ -503,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 1703595247}
     - target: {fileID: 3736366323169893967, guid: d9182e702e31fbc4ca73739df1400e0b, type: 3}
       propertyPath: usarWASD
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4172860115500186817, guid: d9182e702e31fbc4ca73739df1400e0b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -929,7 +929,7 @@ Transform:
   m_GameObject: {fileID: 1115845264}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10687769, y: -3.468757e-15, z: 3.7286864e-16, w: 0.99427223}
-  m_LocalPosition: {x: 0, y: 1.2599999, z: -4}
+  m_LocalPosition: {x: -6.8199463, y: 1.2599999, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1161,6 +1161,10 @@ PrefabInstance:
       propertyPath: mycam
       value: 
       objectReference: {fileID: 1703595247}
+    - target: {fileID: 3736366323169893967, guid: d9182e702e31fbc4ca73739df1400e0b, type: 3}
+      propertyPath: usarWASD
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4172860115500186817, guid: d9182e702e31fbc4ca73739df1400e0b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.39
@@ -1417,7 +1421,7 @@ Transform:
   m_GameObject: {fileID: 1703595242}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10687769, y: -3.468757e-15, z: 3.7286864e-16, w: 0.99427223}
-  m_LocalPosition: {x: 6.8199463, y: 1.2599999, z: -4}
+  m_LocalPosition: {x: 0, y: 1.2599999, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
