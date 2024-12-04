@@ -3,21 +3,20 @@ using UnityEngine;
 
 public class camera_controler : MonoBehaviour
 {
-    public Transform Target;
-    public Transform CameraTarget;
-    public float triget;
+    public Transform nave; // Referência à nave
+    public Vector3 offset = new Vector3(0, 5, -10); // Posição da câmera em relação à nave
+    public float suavidade = 2f; // Suavidade ao seguir
 
-    public Vector2 targetLook;
-
-    private void LateUpdate()
+    void LateUpdate()
     {
-        CameraTarget.transform.position = Target.position;
-        CameraTarget.transform.rotation = Quaternion.Euler(targetLook.x, targetLook.y, 0);
-    }
+        if (nave != null)
+        {
+            // Calcula a nova posição da câmera
+            Vector3 novaPosicao = nave.position + nave.TransformDirection(offset);
+            transform.position = Vector3.Lerp(transform.position, novaPosicao, Time.deltaTime * suavidade);
 
-    public void IncrementLookRotation(Vector2 look_delta)
-    {
-        targetLook += look_delta;
+            // Faz a câmera olhar para a nave
+            transform.LookAt(nave);
+        }
     }
-
 }

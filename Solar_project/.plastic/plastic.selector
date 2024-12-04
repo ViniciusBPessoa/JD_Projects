@@ -1,4 +1,0 @@
-repository "Solar_project@BCC_company@cloud"
-  path "/"
-    br "/main"
-    co "/main"
