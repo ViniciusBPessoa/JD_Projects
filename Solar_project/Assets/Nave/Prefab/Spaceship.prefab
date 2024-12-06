@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789973544514204533}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.63617885, y: -0.020297624, z: -0.016746258, w: 0.7710928}
-  m_LocalPosition: {x: 0.024841309, y: -2.021, z: -0.471527}
+  m_LocalRotation: {x: -0.29068413, y: 0.58992714, z: 0.2401687, w: 0.7140082}
+  m_LocalPosition: {x: -2.4551392, y: -2.021, z: -0.471527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1158303756885713375}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -15.365, y: 79.128, z: 0}
 --- !u!20 &3946717874962302281
 Camera:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8361065593150218825}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.29068407, y: 0.589927, z: 0.24016859, w: 0.71400833}
+  m_LocalRotation: {x: -0.29068413, y: 0.589927, z: 0.24016857, w: 0.71400833}
   m_LocalPosition: {x: -2.4551392, y: -2.021, z: -0.471527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -465,6 +465,7 @@ MonoBehaviour:
   distantFOV: 40
   closeOrbits: {x: 2, y: 4, z: 2.5}
   distantOrbits: {x: 4, y: 8, z: 5}
+  is_09: 1
 --- !u!1001 &1700573249409189428
 PrefabInstance:
   m_ObjectHideFlags: 0
