@@ -2,29 +2,78 @@
 
 public class Move_Protagonista : MonoBehaviour
 {
-    public float velocidade = 5f;
+    [SerializeField] private float velocidade = 5f;
+    [SerializeField] private float velocidade_correndo = 8f;
+    [SerializeField] private float velocidade_esquivando = 10f;
+
+    private Rigidbody2D rig;
+
+    private float velocidade_inicial;
+    private Vector2 _direcao;
+    private bool _isRolando;
+
+    public Vector2 direcao
+    {
+        get { return _direcao; }
+        set { _direcao = value; } 
+    }
+    public bool rolando
+    {
+        get { return _isRolando; }
+        set { _isRolando = value; }
+    }
+
+    private void Start()
+    {
+        rig = GetComponent<Rigidbody2D>();
+        velocidade_inicial = velocidade;
+    }
 
     void Update()
+    {
+        // Capturar entrada do teclado
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        // Criar vetor de movimento no plano XZ
+        _direcao = new Vector2(horizontal, vertical);
+
+        correndo();
+        OnRolando();
+    }
+
+    private void FixedUpdate()
     {
         Movimento();
     }
 
+    #region Movimento
+
     private void Movimento()
     {
-        // Capturar entrada do teclado
-        float horizontal = Input.GetAxis("Horizontal"); // A/D ou ←/→
-        float vertical = Input.GetAxis("Vertical"); // W/S ou ↑/↓
-
-        // Criar vetor de movimento no plano XZ
-        Vector3 direcao = new Vector3(horizontal, vertical, 0);
-
-        // Normalizar a direção (opcional para manter velocidade constante)
-        if (direcao.magnitude > 1)
-        {
-            direcao.Normalize();
-        }
-
-        // Mover o objeto no plano XZ
-        transform.Translate(direcao * velocidade * Time.deltaTime, Space.World);
+        rig.MovePosition(rig.position + _direcao * velocidade * Time.fixedDeltaTime);
     }
+    private void correndo()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            velocidade = velocidade_correndo;
+        }
+        if ((Input.GetKeyUp(KeyCode.LeftShift)))
+        {
+            velocidade = velocidade_inicial;
+        }
+    }
+
+    void OnRolando()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            _isRolando = true;
+        }else if (Input.GetMouseButtonUp(1)) 
+        { 
+            _isRolando = false; 
+        }
+    }
+
+    #endregion
 }
