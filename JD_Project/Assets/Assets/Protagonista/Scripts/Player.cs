@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class Move_Protagonista : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] private float velocidade = 5f;
     [SerializeField] private float velocidade_correndo = 8f;
     [SerializeField] private float velocidade_esquivando = 10f;
 
+    [SerializeField] private int _vida;
+
     private Rigidbody2D rig;
+    private Animator animator;
 
     private float velocidade_inicial;
     private Vector2 _direcao;
@@ -15,7 +18,7 @@ public class Move_Protagonista : MonoBehaviour
     public Vector2 direcao
     {
         get { return _direcao; }
-        set { _direcao = value; } 
+        set { _direcao = value; }
     }
     public bool rolando
     {
@@ -23,9 +26,16 @@ public class Move_Protagonista : MonoBehaviour
         set { _isRolando = value; }
     }
 
+    public int vida
+    {
+        get { return _vida; }
+        set { _vida = value; }
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         velocidade_inicial = velocidade;
     }
 
@@ -34,7 +44,6 @@ public class Move_Protagonista : MonoBehaviour
         // Capturar entrada do teclado
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        // Criar vetor de movimento no plano XZ
         _direcao = new Vector2(horizontal, vertical);
 
         correndo();
@@ -50,29 +59,44 @@ public class Move_Protagonista : MonoBehaviour
 
     private void Movimento()
     {
-        rig.MovePosition(rig.position + _direcao * velocidade * Time.fixedDeltaTime);
+        // Ajusta a velocidade dependendo do estado de rolamento
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Roll"))
+        {
+            rig.MovePosition(rig.position + _direcao * velocidade_esquivando * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rig.MovePosition(rig.position + _direcao * velocidade * Time.fixedDeltaTime);
+        }
     }
+
     private void correndo()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             velocidade = velocidade_correndo;
         }
-        if ((Input.GetKeyUp(KeyCode.LeftShift)))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             velocidade = velocidade_inicial;
         }
     }
 
-    void OnRolando()
+    private void OnRolando()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            _isRolando = true;
-        }else if (Input.GetMouseButtonUp(1)) 
-        { 
-            _isRolando = false; 
+            animator.SetTrigger("esquiva");
         }
+    }
+
+    public void Velocidade_rolamento_Up()
+    {
+        velocidade = velocidade_esquivando;
+    }
+    public void Velocidade_rolamento_Down()
+    {
+        velocidade = velocidade_inicial;
     }
 
     #endregion
