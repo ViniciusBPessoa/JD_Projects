@@ -100,4 +100,34 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+    #region Dano e Morte
+
+    public void ReceberDano(int dano)
+    {
+        if (_isRolando) return; // Se o personagem estiver rolando, ele não leva dano
+
+        vida -= dano;
+        Debug.Log($"Jogador levou {dano} de dano. Vida atual: {vida}");
+        if (vida > 0)
+        {
+            animator.SetTrigger("dano"); // Animação de dano
+        }
+    }
+
+    private void Morrer()
+    {
+        Debug.Log("O jogador morreu!");
+        animator.SetTrigger("morte"); // Animação de morte
+        // Aqui você pode adicionar lógica para reiniciar o nível ou exibir um menu
+    }
+
+    public void Curar(int quantidade)
+    {
+        vida += quantidade;
+        Debug.Log($"Jogador curado em {quantidade}. Vida atual: {vida}");
+    }
+
+    #endregion
+
 }
