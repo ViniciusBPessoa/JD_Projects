@@ -1,24 +1,43 @@
 using UnityEngine;
 
-public class lanterna : MonoBehaviour
+public class Lanterna : MonoBehaviour
 {
-    public GameObject lampada;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject lampada; 
+    private Light luz; 
+    public float intensidadeMin = 0f; 
+    public float intensidadeMax = 100000f; 
+    public float velocidadeScroll = 100f; 
+
     void Start()
     {
-        
+        if (lampada != null)
+        {
+            luz = lampada.GetComponent<Light>();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1))
+        if (lampada != null && luz != null)
         {
-            lampada.SetActive(true);
-        }
-        else
-        {
-            lampada.SetActive(false);
+            if (Input.GetMouseButton(1))
+            {
+                lampada.SetActive(true);
+            }
+            else
+            {
+                lampada.SetActive(false);
+            }
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (scroll != 0)
+            {
+                luz.intensity = Mathf.Clamp(
+                    luz.intensity + scroll * velocidadeScroll,
+                    intensidadeMin,
+                    intensidadeMax
+                );
+            }
         }
     }
 }
