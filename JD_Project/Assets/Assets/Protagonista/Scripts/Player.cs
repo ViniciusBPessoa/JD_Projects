@@ -47,7 +47,6 @@ public class Player : MonoBehaviour
         _direcao = new Vector2(horizontal, vertical);
 
         correndo();
-        OnRolando();
     }
 
     private void FixedUpdate()
@@ -79,14 +78,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             velocidade = velocidade_inicial;
-        }
-    }
-
-    private void OnRolando()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            animator.SetTrigger("esquiva");
         }
     }
 
