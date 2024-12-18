@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4508998403787600458}
   - component: {fileID: 312041470050841369}
+  - component: {fileID: 5734458682688665420}
+  - component: {fileID: 1015052187146507892}
   - component: {fileID: 3232610163271191378}
   - component: {fileID: 6893982681716404910}
   - component: {fileID: 6321974823988181349}
-  - component: {fileID: 5734458682688665420}
-  - component: {fileID: 1015052187146507892}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -92,6 +92,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5734458682688665420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107750875587092480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a30399ebce69241a859d9d6da5be96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variavel: 0
+--- !u!114 &1015052187146507892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107750875587092480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71e0f24f974e6e4fbe085070b84da7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidade: 5
+  velocidade_correndo: 8
+  velocidade_esquivando: 10
+  _vida: 0
 --- !u!61 &3232610163271191378
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -187,31 +216,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5734458682688665420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6107750875587092480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a30399ebce69241a859d9d6da5be96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1015052187146507892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6107750875587092480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71e0f24f974e6e4fbe085070b84da7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidade: 5
-  velocidade_correndo: 8
-  velocidade_esquivando: 10
-  _vida: 0

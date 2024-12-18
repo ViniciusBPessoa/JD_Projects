@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
 
     private float velocidade_inicial;
     private Vector2 _direcao;
+
     private bool _isRolando;
+    private bool _isDano;
 
     public Vector2 direcao
     {
@@ -32,6 +34,12 @@ public class Player : MonoBehaviour
         set { _vida = value; }
     }
 
+    public bool dano
+    {
+        get { return _isDano; }
+        set { _isDano = value; }
+    }
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -47,6 +55,7 @@ public class Player : MonoBehaviour
         _direcao = new Vector2(horizontal, vertical);
 
         correndo();
+        Rolar();
     }
 
     private void FixedUpdate()
@@ -80,6 +89,17 @@ public class Player : MonoBehaviour
             velocidade = velocidade_inicial;
         }
     }
+    private void Rolar()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rolando = true;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            rolando = false;
+        }
+    }
 
     public void Velocidade_rolamento_Up()
     {
@@ -97,13 +117,18 @@ public class Player : MonoBehaviour
     public void ReceberDano(int dano)
     {
         if (_isRolando) return; // Se o personagem estiver rolando, ele não leva dano
+        if (_isDano) return;
 
         vida -= dano;
-        Debug.Log($"Jogador levou {dano} de dano. Vida atual: {vida}");
         if (vida > 0)
         {
-            animator.SetTrigger("dano"); // Animação de dano
+            _isDano = true;
         }
+    }
+
+    public void Retomar()
+    {
+        _isDano = false;
     }
 
     private void Morrer()
