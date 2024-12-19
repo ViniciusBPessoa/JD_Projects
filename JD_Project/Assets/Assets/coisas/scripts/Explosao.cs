@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement; // Para carregar/recarregar cenas
 public class Explosao : MonoBehaviour
 {
     public BoxCollider2D colider;
+    public float dano;
 
     void Start()
     {
@@ -19,8 +20,8 @@ public class Explosao : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Jogador atingido! Recarregando cena...");
-            RecarregarCena();
+            Player joagdor = other.GetComponent<Player>();
+            joagdor.ReceberDano(dano);
         }
     }
 

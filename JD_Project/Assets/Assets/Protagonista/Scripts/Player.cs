@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float velocidade_correndo = 8f;
     [SerializeField] private float velocidade_esquivando = 10f;
 
-    [SerializeField] private int _vida;
+    [SerializeField] private float _vida;
 
     private Rigidbody2D rig;
     private Animator animator;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         set { _isRolando = value; }
     }
 
-    public int vida
+    public float vida
     {
         get { return _vida; }
         set { _vida = value; }
@@ -114,15 +114,22 @@ public class Player : MonoBehaviour
 
     #region Dano e Morte
 
-    public void ReceberDano(int dano)
+    public void ReceberDano(float dano)
     {
         if (_isRolando) return; // Se o personagem estiver rolando, ele não leva dano
         if (_isDano) return;
 
-        vida -= dano;
-        if (vida > 0)
+
+        float dano_final = vida - dano;
+        Debug.Log(dano_final);
+        if (dano_final > 0)
         {
+            vida -= dano;
             _isDano = true;
+        }else if (dano_final < 0)
+        {
+            vida = 0;
+            _isDano = false;
         }
     }
 

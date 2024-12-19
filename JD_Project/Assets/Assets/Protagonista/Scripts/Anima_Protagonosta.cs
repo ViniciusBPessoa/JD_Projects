@@ -20,6 +20,7 @@ public class Anima_protago : MonoBehaviour
     {
         movemento();
         rolar = player.rolando;
+        tomarDano = player.dano;
     }
 
     private void movemento()

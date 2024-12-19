@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colider: {fileID: 0}
+  dano: 10
 --- !u!58 &1512346992161427375
 CircleCollider2D:
   m_ObjectHideFlags: 0
