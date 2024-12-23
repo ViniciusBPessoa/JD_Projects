@@ -17,28 +17,7 @@ public class Player : MonoBehaviour
     private bool _isRolando;
     private bool _isDano;
 
-    public Vector2 direcao
-    {
-        get { return _direcao; }
-        set { _direcao = value; }
-    }
-    public bool rolando
-    {
-        get { return _isRolando; }
-        set { _isRolando = value; }
-    }
 
-    public float vida
-    {
-        get { return _vida; }
-        set { _vida = value; }
-    }
-
-    public bool dano
-    {
-        get { return _isDano; }
-        set { _isDano = value; }
-    }
 
     private void Start()
     {
@@ -121,7 +100,6 @@ public class Player : MonoBehaviour
 
 
         float dano_final = vida - dano;
-        Debug.Log(dano_final);
         if (dano_final > 0)
         {
             vida -= dano;
@@ -148,9 +126,30 @@ public class Player : MonoBehaviour
     public void Curar(int quantidade)
     {
         vida += quantidade;
-        Debug.Log($"Jogador curado em {quantidade}. Vida atual: {vida}");
     }
 
     #endregion
 
+    public Vector2 direcao
+    {
+        get { return _direcao; }
+        set { _direcao = value; }
+    }
+    public bool rolando
+    {
+        get { return _isRolando; }
+        set { _isRolando = value; }
+    }
+
+    public float vida
+    {
+        get { return _vida; }
+        set { _vida = value; }
+    }
+
+    public bool dano
+    {
+        get { return _isDano; }
+        set { _isDano = value; }
+    }
 }

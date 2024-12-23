@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7473452538428334080}
+  - component: {fileID: 1445994834586389216}
   - component: {fileID: 7475362371458590869}
   - component: {fileID: 1410950051252553044}
-  - component: {fileID: 230973581175832012}
   - component: {fileID: 217979505457973379}
   m_Layer: 0
   m_Name: Esqueleto
@@ -37,6 +37,27 @@ Transform:
   - {fileID: 808609692288476303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1445994834586389216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773918777173208917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6d735cdc0d522419d539d615aa4639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidade: 6
+  _vida: 100
+  _isDano: 0
+  velocidade_atk: 0
+  estado_animacao: 0
+  distancia_ativa: 6
+  player: {fileID: 6107750875587092480, guid: 05a1b26a14801c04192016e95c128244, type: 3}
+  agent: {fileID: 217979505457973379}
+  perseguindo: 0
 --- !u!50 &7475362371458590869
 Rigidbody2D:
   serializedVersion: 5
@@ -110,22 +131,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &230973581175832012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773918777173208917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4288a447001c804bb88aa2ff17dcbc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 217979505457973379}
-  con_animacao: {fileID: 5921415334412300471}
-  distancia_ativa: 4
-  perseguindo: 0
 --- !u!195 &217979505457973379
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -272,8 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  explocao: {fileID: 3961120250413071300, guid: d5ce58cd9e9e91f4cb31b79dd649da10, type: 3}
-  explo_pos: {fileID: 808609692288476303}
+  stats: {fileID: 1445994834586389216}
+  estado_animacao: 0
 --- !u!1 &5335599432867467710
 GameObject:
   m_ObjectHideFlags: 0

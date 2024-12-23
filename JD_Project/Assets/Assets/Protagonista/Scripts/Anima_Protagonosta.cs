@@ -27,7 +27,11 @@ public class Anima_protago : MonoBehaviour
     {
         if (tomarDano)
         {
-            animator.SetTrigger("dano");
+            animator.SetBool("dano", true);
+        }
+        else
+        {
+            animator.SetBool("dano", false);
         }
         // Verifica se há movimento
         if (player.direcao.sqrMagnitude > 0)
@@ -54,5 +58,10 @@ public class Anima_protago : MonoBehaviour
         {
             animator.SetInteger("transicao", 0);
         }
+    }
+
+    public void ativaPorra()
+    {
+        animator.Play("base");
     }
 }

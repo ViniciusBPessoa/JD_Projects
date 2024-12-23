@@ -3,10 +3,11 @@ using UnityEngine;
 public class ControleAnimacao : MonoBehaviour
 {
     public Animator animator;
+    public stats stats;
 
-    public GameObject explocao;
-    public Transform explo_pos;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int estado_animacao;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -15,16 +16,13 @@ public class ControleAnimacao : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        estado_animacao = stats.estado_animacao;
+        PlayAnimation();
     }
 
-    public void PlayAnimation(int valor)
+    public void PlayAnimation()
     {
-        animator.SetInteger("Estado", valor);
+        animator.SetInteger("Estado", estado_animacao);
     }
 
-    public void cria_explosão()
-    {
-        Instantiate(explocao, explo_pos.position, explo_pos.rotation);
-    }
 }
