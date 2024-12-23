@@ -23,11 +23,16 @@ public class Explosao : MonoBehaviour
             Player joagdor = other.GetComponent<Player>();
             joagdor.ReceberDano(dano);
         }
+        if (other.CompareTag("Inimigo"))
+        {
+            stats status = other.GetComponent<stats>();
+            status.ReceberDano(dano);
+        }
     }
 
     private void RecarregarCena()
     {
         // Recarrega a cena atual
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    }   
 }
