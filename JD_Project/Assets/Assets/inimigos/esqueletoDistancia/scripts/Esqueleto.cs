@@ -11,10 +11,6 @@ public class Esqueleto : MonoBehaviour
     public Transform explo_pos;
     public GameObject explosao;
 
-
-    private Player player;
-    private bool _isDano;
-
     [System.Obsolete]
     void Start()
     {

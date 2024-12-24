@@ -24,5 +24,9 @@ public class ControleAnimacao : MonoBehaviour
     {
         animator.SetInteger("Estado", estado_animacao);
     }
+    public void StopDano() 
+    {
+        stats.dano = false;
+    }
 
 }
