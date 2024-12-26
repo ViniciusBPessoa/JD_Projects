@@ -6,6 +6,8 @@ public class DisparoDeProjetil : MonoBehaviour
     public Transform pontoDeDisparo; // Ponto de onde os proj�teis ser�o disparados
     public float velocidadeProjetil = 10f; // Velocidade do proj�til
 
+    public float dano;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Bot�o esquerdo do mouse
@@ -23,6 +25,7 @@ public class DisparoDeProjetil : MonoBehaviour
 
         // Cria o proj�til
         GameObject projetil = Instantiate(projetilPrefab, pontoDeDisparo.position, Quaternion.identity);
+        projetil.GetComponent<Projetio>().dano = dano;
 
         // Define a velocidade do proj�til
         Rigidbody2D rb = projetil.GetComponent<Rigidbody2D>();

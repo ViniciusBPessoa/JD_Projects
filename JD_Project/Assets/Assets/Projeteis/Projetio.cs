@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Projetio : MonoBehaviour
 {
+    public float dano;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,17 +18,15 @@ public class Projetio : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Verifica se o objeto que entrou tem uma tag específica (opcional)
         if (other.CompareTag("Inimigo"))
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            stats status = other.GetComponent<stats>();
+            status.ReceberDano(dano);
         }
         if (other.CompareTag("Cenario"))
         {
             Destroy(gameObject);
         }
-
     }
 
 }

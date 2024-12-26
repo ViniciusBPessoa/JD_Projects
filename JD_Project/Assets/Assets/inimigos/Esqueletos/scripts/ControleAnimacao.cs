@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ControleAnimacao : MonoBehaviour
@@ -6,6 +7,7 @@ public class ControleAnimacao : MonoBehaviour
     public stats stats;
 
     public int estado_animacao;
+    public bool morto;
 
 
     void Start()
@@ -27,6 +29,12 @@ public class ControleAnimacao : MonoBehaviour
     public void StopDano() 
     {
         stats.dano = false;
+        stats.estado_animacao = 0;
+    }
+
+    public void altoDestruicao()
+    {
+        stats.altoDestruicao();
     }
 
 }

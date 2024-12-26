@@ -6,13 +6,15 @@ public class stats : MonoBehaviour
 
     [SerializeField] private float velocidade;
     [SerializeField] private float _vida;
-    [SerializeField] private bool _isDano;
+    [SerializeField] private float _vidaMaxima;
+    [SerializeField] private float _poder;
 
-    [SerializeField] private float velocidade_atk;
+    [SerializeField] private bool _isDano;    [SerializeField] private float velocidade_atk;
 
     [SerializeField] public int estado_animacao;
     [SerializeField] private float distancia_ativa;
 
+    public lifeBar lifeBar;
     public Player player;
 
     public  NavMeshAgent agent;
@@ -24,6 +26,7 @@ public class stats : MonoBehaviour
         player = FindObjectOfType<Player>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        _vida = vidaMaxima;
     }
 
     // Update is called once per frame
@@ -38,13 +41,17 @@ public class stats : MonoBehaviour
         if (dano_final > 0)
         {
             vida -= dano;
+            estado_animacao = 10;
             _isDano = true;
         }
-        else if (dano_final < 0)
+        else if (dano_final <= 0)
         {
             vida = 0;
-            _isDano = false;
+            estado_animacao = 11;
+            agent.isStopped = true;
         }
+
+        lifeBar.AlterarLifeBar();
     }
 
     public void perseguicao()
@@ -52,10 +59,14 @@ public class stats : MonoBehaviour
         float dist = Vector3.Distance(player.transform.position, transform.position);
         if (dist < distancia_ativa)
         {
-            estado_animacao = 0;
+            estado_animacao = 1;
             perseguindo = true;
         }
-        else { perseguindo = false; }
+        else 
+        {
+            perseguindo = false;
+            estado_animacao = 0;
+        }
 
         if (perseguindo)
         {
@@ -81,6 +92,11 @@ public class stats : MonoBehaviour
         }
     }
 
+    public void altoDestruicao()
+    {
+        Destroy(this.gameObject);
+    }
+
     public float vida
     {
         get { return _vida; }
@@ -90,5 +106,16 @@ public class stats : MonoBehaviour
     {
         get { return _isDano; }
         set { _isDano = value; }
+    }
+
+    public float poder
+    {
+        get { return _poder; }
+        set { poder = value; }
+    }
+    public float vidaMaxima
+    {
+        get { return _vidaMaxima; }
+        set { _vidaMaxima = value; }
     }
 }
