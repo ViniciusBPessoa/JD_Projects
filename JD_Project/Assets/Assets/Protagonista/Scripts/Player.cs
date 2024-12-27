@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -6,7 +7,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float velocidade_correndo = 8f;
     [SerializeField] private float velocidade_esquivando = 10f;
 
+    public float maxVida;
     [SerializeField] private float _vida;
+    public float maxMana;
+    public float mana;
+    public float poder;
 
     private Rigidbody2D rig;
     private Animator animator;
@@ -17,18 +22,18 @@ public class Player : MonoBehaviour
     private bool _isRolando;
     private bool _isDano;
 
-
-
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         velocidade_inicial = velocidade;
+
+        _vida = maxVida;
+        mana = maxMana;
     }
 
     void Update()
     {
-        // Capturar entrada do teclado
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         _direcao = new Vector2(horizontal, vertical);
@@ -46,7 +51,6 @@ public class Player : MonoBehaviour
 
     private void Movimento()
     {
-        // Ajusta a velocidade dependendo do estado de rolamento
         if (animator.GetCurrentAnimatorStateInfo(0).IsTag("Roll"))
         {
             rig.MovePosition(rig.position + _direcao * velocidade_esquivando * Time.fixedDeltaTime);
@@ -68,6 +72,7 @@ public class Player : MonoBehaviour
             velocidade = velocidade_inicial;
         }
     }
+
     private void Rolar()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -91,24 +96,33 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region Dano e Morte
+    #region Dano, Vida e Mana
 
     public void ReceberDano(float dano)
     {
         if (_isRolando) return; // Se o personagem estiver rolando, ele não leva dano
         if (_isDano) return;
 
+        _vida -= dano;
+        _vida = Mathf.Max(_vida, 0); // Garante que a vida não fique abaixo de 0
+        _isDano = true;
 
-        float dano_final = vida - dano;
-        if (dano_final > 0)
+        if (_vida <= 0)
         {
-            vida -= dano;
-            _isDano = true;
-        }else if (dano_final < 0)
-        {
-            vida = 0;
-            _isDano = false;
+            Morrer();
         }
+    }
+
+    public void ReceberVida(float quantidade)
+    {
+        _vida += quantidade;
+        _vida = Mathf.Min(_vida, maxVida); // Garante que a vida não exceda o máximo
+    }
+
+    public void ReceberMana(float quantidade)
+    {
+        mana += quantidade;
+        mana = Mathf.Min(mana, maxMana); // Garante que a mana não exceda o máximo
     }
 
     public void Retomar()
@@ -118,17 +132,17 @@ public class Player : MonoBehaviour
 
     private void Morrer()
     {
-        Debug.Log("O jogador morreu!");
-        animator.SetTrigger("morte"); // Animação de morte
-        // Aqui você pode adicionar lógica para reiniciar o nível ou exibir um menu
+        SceneManager.LoadScene("Cena_morte"); // Substitua pelo nome da sua cena
     }
 
     public void Curar(int quantidade)
     {
-        vida += quantidade;
+        ReceberVida(quantidade);
     }
 
     #endregion
+
+    #region Propriedades
 
     public Vector2 direcao
     {
@@ -140,16 +154,16 @@ public class Player : MonoBehaviour
         get { return _isRolando; }
         set { _isRolando = value; }
     }
-
     public float vida
     {
         get { return _vida; }
-        set { _vida = value; }
+        set { _vida = Mathf.Clamp(value, 0, maxVida); } // Limita o valor entre 0 e maxVida
     }
-
     public bool dano
     {
         get { return _isDano; }
         set { _isDano = value; }
     }
+
+    #endregion
 }

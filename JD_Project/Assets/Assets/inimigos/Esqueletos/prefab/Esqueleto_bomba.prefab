@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7475362371458590869}
   - component: {fileID: 1410950051252553044}
   - component: {fileID: 217979505457973379}
+  - component: {fileID: 1096857683741911707}
   m_Layer: 0
   m_Name: Esqueleto_bomba
   m_TagString: Inimigo
@@ -36,6 +37,7 @@ Transform:
   - {fileID: 1640742917156167815}
   - {fileID: 808609692288476303}
   - {fileID: 2049707237676788441}
+  - {fileID: 6711909759155836094}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1445994834586389216
@@ -52,12 +54,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidade: 6
   _vida: 100
-  _vidaMaxima: 0
-  _poder: 0
+  _vidaMaxima: 100
+  _poder: 20
   _isDano: 0
   velocidade_atk: 0
   estado_animacao: 0
-  distancia_ativa: 6
+  distancia_ativa: 8
   lifeBar: {fileID: 3570621692618821312}
   player: {fileID: 1015052187146507892, guid: 05a1b26a14801c04192016e95c128244, type: 3}
   agent: {fileID: 217979505457973379}
@@ -157,6 +159,53 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1096857683741911707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773918777173208917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b272000f4da114f47beaa3d165d602a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objetosParaSpawn:
+  - {fileID: 5922418049366017812, guid: 39ff0de0b1b9f8d4cbbd2b250aa100df, type: 3}
+  - {fileID: 3290068863783700027, guid: d69cc5ff41b22c84d9696fc758339714, type: 3}
+  pontoDeSpawn: {fileID: 6711909759155836094}
+--- !u!1 &2702018703848100310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6711909759155836094}
+  m_Layer: 0
+  m_Name: local
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6711909759155836094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702018703848100310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7473452538428334080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3739304199538510014
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +286,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 6677806975911841103, guid: 9178ad6e20109104598a03aaf8bcdcc3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -299,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosao: {fileID: 3961120250413071300, guid: d5ce58cd9e9e91f4cb31b79dd649da10, type: 3}
   ExploPos: {fileID: 808609692288476303}
+  statos: {fileID: 1445994834586389216}
 --- !u!1 &3979302993862161835
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +636,7 @@ GameObject:
   - component: {fileID: 9063540529697927562}
   - component: {fileID: 6651986696006918297}
   - component: {fileID: 4519901396654620771}
+  - component: {fileID: 272225264556151509}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -634,7 +685,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &6651986696006918297
 MonoBehaviour:
@@ -676,3 +727,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &272225264556151509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948183704558852565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b38f85c713808498b8ef6e5aca7707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

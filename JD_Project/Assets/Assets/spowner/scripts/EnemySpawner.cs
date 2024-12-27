@@ -3,10 +3,10 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject objetoParaSpawnar;    // O prefab do objeto a ser spawnado
-    public float intervalo = 5f;            // Intervalo entre os spawns
-    public int quantidadeInicial = 1;       // Quantidade inicial de objetos
-    public int quantidadeIncrementada = 1;  // A quantidade de objetos a mais a ser spawnada a cada ciclo
+    public GameObject[] objetosParaSpawnar;    // Lista de prefabs de objetos a serem spawnados
+    public float intervalo = 5f;                // Intervalo entre os spawns
+    public int quantidadeInicial = 1;           // Quantidade inicial de objetos
+    public int quantidadeIncrementada = 1;      // A quantidade de objetos a mais a ser spawnada a cada ciclo
 
     private void Start()
     {
@@ -36,11 +36,23 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnObjectInArea()
     {
-        // Gera uma posição aleatória dentro da área do colisor
-        Vector3 spawnPosition = GetRandomPointInCollider();
+        // Verifique se a lista de objetos para spawnar não está vazia
+        if (objetosParaSpawnar.Length > 0)
+        {
+            // Seleciona um prefab aleatório da lista
+            int randomIndex = Random.Range(0, objetosParaSpawnar.Length);
+            GameObject objetoAleatorio = objetosParaSpawnar[randomIndex];
 
-        // Instancia o objeto
-        Instantiate(objetoParaSpawnar, spawnPosition, Quaternion.identity);
+            // Gera uma posição aleatória dentro da área do colisor
+            Vector3 spawnPosition = GetRandomPointInCollider();
+
+            // Instancia o objeto escolhido aleatoriamente
+            Instantiate(objetoAleatorio, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("Lista de objetos para spawnar está vazia!");
+        }
     }
 
     private Vector3 GetRandomPointInCollider()

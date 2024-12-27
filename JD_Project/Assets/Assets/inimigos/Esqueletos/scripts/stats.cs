@@ -9,7 +9,8 @@ public class stats : MonoBehaviour
     [SerializeField] private float _vidaMaxima;
     [SerializeField] private float _poder;
 
-    [SerializeField] private bool _isDano;    [SerializeField] private float velocidade_atk;
+    [SerializeField] private bool _isDano;    
+    [SerializeField] private float velocidade_atk;
 
     [SerializeField] public int estado_animacao;
     [SerializeField] private float distancia_ativa;

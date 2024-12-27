@@ -50,7 +50,7 @@ CircleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 6
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -81,6 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0d0c50711ab4f42a7887c7d0528c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 773918777173208917, guid: 3534c9304612d52488fc35e253e67c0e, type: 3}
-  initialSpawnCount: 1
-  spawnArea: {fileID: 2713368840718720802}
+  objetosParaSpawnar:
+  - {fileID: 773918777173208917, guid: 3534c9304612d52488fc35e253e67c0e, type: 3}
+  - {fileID: 773918777173208917, guid: fb0079b5307359e40a74c1e56fdfea6a, type: 3}
+  intervalo: 5
+  quantidadeInicial: 1
+  quantidadeIncrementada: 1
