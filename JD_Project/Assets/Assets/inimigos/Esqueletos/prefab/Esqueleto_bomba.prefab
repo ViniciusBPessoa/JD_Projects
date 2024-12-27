@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7475362371458590869}
   - component: {fileID: 1410950051252553044}
   - component: {fileID: 217979505457973379}
-  - component: {fileID: 1096857683741911707}
   m_Layer: 0
   m_Name: Esqueleto_bomba
   m_TagString: Inimigo
@@ -159,22 +158,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1096857683741911707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773918777173208917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b272000f4da114f47beaa3d165d602a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objetosParaSpawn:
-  - {fileID: 5922418049366017812, guid: 39ff0de0b1b9f8d4cbbd2b250aa100df, type: 3}
-  - {fileID: 3290068863783700027, guid: d69cc5ff41b22c84d9696fc758339714, type: 3}
-  pontoDeSpawn: {fileID: 6711909759155836094}
 --- !u!1 &2702018703848100310
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +317,9 @@ MonoBehaviour:
   stats: {fileID: 1445994834586389216}
   estado_animacao: 0
   morto: 0
+  objetosParaSpawn:
+  - {fileID: 3290068863783700027, guid: d69cc5ff41b22c84d9696fc758339714, type: 3}
+  - {fileID: 5922418049366017812, guid: 39ff0de0b1b9f8d4cbbd2b250aa100df, type: 3}
 --- !u!114 &5505772407409370087
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,10 +9,12 @@ public class ControleAnimacao : MonoBehaviour
     public int estado_animacao;
     public bool morto;
 
+    [SerializeField] private GameObject[] objetosParaSpawn;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        stats = GetComponentInParent<stats>(); // Obtém o componente stats do objeto pai
     }
 
     // Update is called once per frame
@@ -34,6 +36,14 @@ public class ControleAnimacao : MonoBehaviour
 
     public void altoDestruicao()
     {
+        if (objetosParaSpawn.Length > 0)
+        {
+            // Gera um índice aleatório na lista de prefabs
+            int indiceAleatorio = Random.Range(0, objetosParaSpawn.Length);
+
+            // Spawna o objeto selecionado no ponto de spawn
+            Instantiate(objetosParaSpawn[indiceAleatorio], this.transform.position, Quaternion.identity);
+        }
         stats.altoDestruicao();
     }
 

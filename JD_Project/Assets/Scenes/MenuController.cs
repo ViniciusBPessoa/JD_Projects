@@ -17,7 +17,11 @@ public class MenuController : MonoBehaviour
         // Troca para a cena especificada
         SceneManager.LoadScene("SampleScene"); // Substitua pelo nome da sua cena
     }
-
+    public void IniciarTest()
+    {
+        // Troca para a cena especificada
+        SceneManager.LoadScene("Cena_test"); // Substitua pelo nome da sua cena
+    }
     // Função para fechar o jogo
     public void FecharJogo()
     {

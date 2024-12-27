@@ -48,6 +48,8 @@ public class Tela : MonoBehaviour
     }
     public void retomarMenu()
     {
+        isPausado = false; // Marca o jogo como não pausado
+        Time.timeScale = 0f; // Para o tempo no jogo
         SceneManager.LoadScene("Menu_principal"); // Substitua pelo nome da sua cena
     }
 }
