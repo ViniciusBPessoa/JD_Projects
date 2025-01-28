@@ -2,20 +2,37 @@ using UnityEngine;
 
 public class MoveNave : MonoBehaviour
 {
-    public float speed = 5f; // Velocidade da nave
-    public float delay = 10f; // Suavidade na rota��o
-    private CharacterController controller; // Refer�ncia ao CharacterController
-    public Transform Mycam; // Refer�ncia � c�mera para seguir a dire��o
-    public bool usarWASD = true; // Define se o controle � por WASD ou setas
+    public float acceleration = 10f; // Taxa de aceleração padrão
+    public float boostedAcceleration = 20f; // Taxa de aceleração ao segurar Shift
+    public float maxSpeed = 15f; // Velocidade máxima da nave
+    public float rotationSpeed = 5f; // Suavidade na rotação
+    public Transform Mycam; // Referência à câmera para seguir a direção
+    public bool usarWASD = true; // Define se o controle é por WASD ou setas
+
+    public AudioClip engineSound; // Som do motor da nave
+    private AudioSource audioSource; // Componente de áudio
+    private Rigidbody rb; // Referência ao Rigidbody
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
+        // Obtém o Rigidbody do objeto
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false; // Desativa a gravidade para um controle mais fluido
+        rb.linearDamping = 1f; // Configura o arrasto para simular resistência ao movimento
+
+        // Configura o AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = engineSound;
+        audioSource.loop = true; // Som do motor deve ser contínuo
+        audioSource.playOnAwake = false; // Não toca automaticamente
+        audioSource.volume = 0.5f; // Volume inicial
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         Move();
+        StopMovement();
+        UpdateEngineSound();
     }
 
     private void Move()
@@ -37,21 +54,60 @@ public class MoveNave : MonoBehaviour
             moveVertical = Input.GetKey(KeyCode.UpArrow) ? 1f : (Input.GetKey(KeyCode.DownArrow) ? -1f : 0f);
         }
 
-        // Cria o vetor de movimento
+        // Cria o vetor de movimento baseado na direção da câmera
         Vector3 movimento = new Vector3(moveHorizontal, 0, moveVertical);
         movimento = Mycam.TransformDirection(movimento);
 
-        // Move o objeto na cena
-        controller.Move(movimento * Time.deltaTime * speed);
+        // Escolhe a aceleração com base na tecla Shift
+        float currentAcceleration = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) ? boostedAcceleration : acceleration;
 
-        // Faz a nave rotacionar suavemente na dire��o do movimento
-        if (movimento.magnitude > 0.1f) // Garante que a nave s� rotacione quando estiver se movendo
+        // Aplica força na direção do movimento
+        if (movimento.magnitude > 0.1f) // Verifica se há entrada de movimento
         {
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(movimento),
-                Time.deltaTime * delay
-            );
+            rb.AddForce(movimento.normalized * currentAcceleration, ForceMode.Acceleration);
+        }
+
+        // Limita a velocidade máxima
+        if (rb.linearVelocity.magnitude > maxSpeed)
+        {
+            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+        }
+
+        // Faz a nave rotacionar na direção da câmera (inclui rotação para cima/baixo)
+        Quaternion targetRotation = Mycam.rotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
+
+    private void StopMovement()
+    {
+        // Para o movimento ao pressionar a barra de espaço
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.linearVelocity = Vector3.zero; // Zera a velocidade linear
+            rb.angularVelocity = Vector3.zero; // Zera a velocidade angular
+        }
+    }
+
+    private void UpdateEngineSound()
+    {
+        // Ativa o som do motor apenas quando a nave está se movendo
+        if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play(); // Toca o som se ainda não estiver tocando
+            }
+
+            // Ajusta o pitch com base na velocidade
+            audioSource.pitch = Mathf.Lerp(1f, 2f, rb.linearVelocity.magnitude / maxSpeed); // Pitch de 1 a 2
+        }
+        else
+        {
+            // Para o som quando a nave não está se movendo
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
         }
     }
 }
