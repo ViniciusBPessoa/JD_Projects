@@ -631,9 +631,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1360725784}
+      - m_Target: {fileID: 1360725785}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: trocaMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2017,8 +2017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442552421829bed45b6ea31f0674b1a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toActivate: {fileID: 1474197275}
-  toDeactivate: {fileID: 1587086106}
+  Menu: {fileID: 1587086106}
+  Nome: {fileID: 1474197275}
 --- !u!4 &1360725786
 Transform:
   m_ObjectHideFlags: 0

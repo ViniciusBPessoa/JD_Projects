@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement; // Para gerenciar cenas
 public class MenuController : MonoBehaviour
 {
 
-    public GameObject toActivate;
-    public GameObject toDeactivate;
+    public GameObject Menu;
+    public GameObject Nome;
 
     // Método para iniciar o jogo (carregar uma cena específica)
     public void StartGame()
@@ -30,12 +30,12 @@ public class MenuController : MonoBehaviour
     // Método para ativar um GameObject e desativar outro
     public void trocaMenu()
     {
-        toActivate.SetActive(true);        
-        toDeactivate.SetActive(false);
+        Menu.SetActive(false);        
+        Nome.SetActive(true);
     }
     public void trocaMenuInverso()
     {
-        toActivate.SetActive(false);
-        toDeactivate.SetActive(true);
+        Menu.SetActive(true);
+        Nome.SetActive(false);
     }
 }
