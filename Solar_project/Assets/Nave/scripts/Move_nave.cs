@@ -13,6 +13,9 @@ public class MoveNave : MonoBehaviour
     private AudioSource audioSource; // Componente de áudio
     private Rigidbody rb; // Referência ao Rigidbody
 
+    public ParticleSystem particleSystem1; // Primeiro sistema de partículas
+    public ParticleSystem particleSystem2; // Segundo sistema de partículas
+
     private void Start()
     {
         // Obtém o Rigidbody do objeto
@@ -33,6 +36,7 @@ public class MoveNave : MonoBehaviour
         Move();
         StopMovement();
         UpdateEngineSound();
+        UpdateParticleEmission(); // Atualiza a emissão de partículas com base na velocidade
     }
 
     private void Move()
@@ -65,6 +69,10 @@ public class MoveNave : MonoBehaviour
         if (movimento.magnitude > 0.1f) // Verifica se há entrada de movimento
         {
             rb.AddForce(movimento.normalized * currentAcceleration, ForceMode.Acceleration);
+
+            // Faz a nave rotacionar na direção da câmera somente enquanto se move
+            Quaternion targetRotation = Mycam.rotation;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
         // Limita a velocidade máxima
@@ -72,10 +80,6 @@ public class MoveNave : MonoBehaviour
         {
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
         }
-
-        // Faz a nave rotacionar na direção da câmera (inclui rotação para cima/baixo)
-        Quaternion targetRotation = Mycam.rotation;
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
     private void StopMovement()
@@ -109,5 +113,19 @@ public class MoveNave : MonoBehaviour
                 audioSource.Stop();
             }
         }
+    }
+
+    private void UpdateParticleEmission()
+    {
+        // Calcula a taxa de emissão com base na velocidade
+        float speed = rb.linearVelocity.magnitude; // Obtém a magnitude da velocidade
+        float emissionRate = Mathf.Lerp(0f, 100f, speed / maxSpeed); // Lerp entre 0 e 100 dependendo da velocidade
+
+        // Atualiza a taxa de emissão para ambos os sistemas de partículas
+        var emissionModule1 = particleSystem1.emission;
+        emissionModule1.rateOverTime = emissionRate;
+
+        var emissionModule2 = particleSystem2.emission;
+        emissionModule2.rateOverTime = emissionRate;
     }
 }
